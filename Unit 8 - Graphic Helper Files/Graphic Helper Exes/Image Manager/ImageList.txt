@@ -1,0 +1,5 @@
+single,box,Single.png
+SLNbL,3,strip,Strip.png
+SLSN,3,stripBlack,stripGreen,stripRed,Strip.png
+GLNbL,3,2,grid,Grid.png
+GLSN,3,2,gridBlack,gridGreen,gridRed,gridBrown,gridBlue,gridYellow,Grid.png
