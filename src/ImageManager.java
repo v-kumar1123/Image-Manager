@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import java.awt.Graphics;
 import java.util.Scanner;
 import java.io.File;
@@ -18,11 +20,11 @@ public class ImageManager
 	/* Pre: Receives a name of file
 	 * Post: Loads all this images in the file to map of images using the provided load type
 	 */
-	public boolean loadImages(String fileName)
-	{
-		return true;
-	}
+	public boolean loadImages(String fileName) {
+		File file=new File(fileName);
+        return true;
 
+	}
 	/* Pre: Receives a key
 	 * Post: returns the image that corrisponds to the given key, null if the key is not found
 	 */
