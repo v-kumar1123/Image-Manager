@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>Image Manager Test</label>
+	</settings>
+	<users>
+		<user>
+			<path>Image Manager Test2.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>Image Manager Test.jcp</path>
+		</project>
+	</projects>
+</workspace>

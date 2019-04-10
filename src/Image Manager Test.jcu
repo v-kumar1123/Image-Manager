@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace_user>
+	<active_project>
+		<label>Image Manager Test</label>
+	</active_project>
+	<projects>
+		<project>
+			<label>Image Manager Test</label>
+			<showfiles>false</showfiles>
+		</project>
+	</projects>
+	<open_files>
+		<docitem>
+			<path>MainFile.java</path>
+			<source>true</source>
+			<index>0</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>TestingWindow.java</path>
+			<source>true</source>
+			<index>1</index>
+			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>ImageList.txt</path>
+			<source>true</source>
+			<index>2</index>
+			<active>false</active>
+		</docitem>
+	</open_files>
+</workspace_user>

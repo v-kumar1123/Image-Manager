@@ -1,2 +1,7 @@
-public class MainFile {
+public class MainFile
+{
+	public static void main(String[] args)
+	{
+		new TestingWindow();
+	}
 }
