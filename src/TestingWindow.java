@@ -12,7 +12,7 @@ public class TestingWindow extends JFrame
 	int x = -1;
 	public TestingWindow()
 	{
-		im.loadImages("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\ImageList.txt");
+		im.loadImages("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\ImageList.txt");
 
 		setUndecorated(true);
 		setSize(400,400);

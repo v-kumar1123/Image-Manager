@@ -1,3 +1,4 @@
+import com.sun.javafx.iio.ios.IosImageLoaderFactory;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
@@ -6,6 +7,7 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
@@ -47,8 +49,12 @@ public class ImageManager
 				snblLoader(readerLine);
 			}
 
-			else if(true) {
+			else if(readerLine[0].equals("SSN")) {
+			    ssnLoader(readerLine);
 			}
+			else if(readerLine[0].equals("GNbL")) {
+		        gnblLoader(readerLine);
+            }
 			else {
 				return false;
 			}
@@ -59,31 +65,77 @@ public class ImageManager
 
 	}
 
+	public void gnblLoader(String[]readerLine) {
+        BufferedImage img=null;
+        try {
+            img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
+        }catch (IOException f) {
+            f.printStackTrace();
+        }
+        BufferedImage[][] imgArray=new BufferedImage[Integer.parseInt(readerLine[1])][Integer.parseInt(readerLine[2])];
+        ArrayList<BufferedImage> imgs=new ArrayList<BufferedImage>();
+        int x=0;
+        int divideIntoX=Integer.parseInt(readerLine[1]);
+        int divideIntoY=Integer.parseInt(readerLine[2]);
+        String key=readerLine[3];
+        int subWidth=img.getWidth()/divideIntoX;
+        for(int y=0;y<divideIntoX;y++) {
+            images.put(key+y,img.getSubimage(x,0,subWidth,img.getHeight()));
+            x+=subWidth;
+        }
+    }
+
 	public void singleLoader(String[] readerLine) {
 		try {
-			images.put(readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[2])));
+			images.put(readerLine[1], ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\"+readerLine[2])));
 		}catch (IOException e ) {
 			e.printStackTrace();
 		}
 	}
 
 	public void snblLoader(String[] readerLine) {
-		BufferedImage img;
+		BufferedImage img=null;
 		try {
-			img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
+			img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
 		}catch (IOException f) {
 			f.printStackTrace();
 		}
-
+		ArrayList<BufferedImage> imgs=new ArrayList<BufferedImage>();
+		int x=0;
+		int divideInto=Integer.parseInt(readerLine[1]);
+		String key=readerLine[2];
+		int subWidth=img.getWidth()/divideInto;
+		for(int y=0;y<divideInto;y++) {
+		    images.put(key+y,img.getSubimage(x,0,subWidth,img.getHeight()));
+		    x+=subWidth;
+        }
 	}
 
 
 	public void ssnLoader(String[] readerLine) {
-		try {
-			images.put(readerLine[2]+readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[3])));
-		}catch (IOException e ) {
-			e.printStackTrace();
-		}
+        BufferedImage img=null;
+        try {
+            img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[Integer.parseInt(readerLine[1])+2]));
+        }catch (IOException f) {
+            f.printStackTrace();
+        }
+        ArrayList<BufferedImage> imgs=new ArrayList<BufferedImage>();
+        int x=0;
+        int divideInto=Integer.parseInt(readerLine[1]);
+        int divideIntoY=Integer.parseInt(readerLine[2]);
+        String key=readerLine[2];
+        int tempX=2;
+        int subWidth=img.getWidth()/divideInto;
+        int subHeight=img.getWidth()/divideInto;
+        for(int y=0;y<divideInto;y++) {
+            imgs.add(img.getSubimage(x,0,subWidth,img.getHeight()));
+            x+=subWidth;
+            tempX++;
+        }
+        int y=0;
+        for(int c=0;c<imgs.size();c++) {
+
+        }
 	}
 	/* Pre: Receives a key
 	 * Post: returns the image that corrisponds to the given key, null if the key is not found
@@ -102,7 +154,12 @@ public class ImageManager
 	 */
 	public BufferedImage loadImage(String key, String file)
 	{
-		return null;
+	    try {
+            return images.put(key, ImageIO.read(new File(file)));
+        }catch (IOException r) {
+	        r.printStackTrace();
+        }
+        return null;
 	}
 
 	/* Pre: Receives a key a
