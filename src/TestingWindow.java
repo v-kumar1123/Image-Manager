@@ -12,9 +12,9 @@ public class TestingWindow extends JFrame
 	int x = -1;
 	public TestingWindow()
 	{
-		im.loadImages("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\ImageList.txt");
+		im.loadImages("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\ImageList.txt");
 
-		setUndecorated(true);
+		setUndecorated(false );
 		setSize(400,400);
 		setVisible(true);
 		while(true)
@@ -48,12 +48,14 @@ public class TestingWindow extends JFrame
 		}
 		else if(x==2)
 		{
+			System.out.println("SSN");
 			g.drawImage(im.getImage("stripBlack"),0,0,null);
 			g.drawImage(im.getImage("stripRed"),105,0,null);
 			g.drawImage(im.getImage("stripGreen"),210,0,null);
 		}
 		else if(x==3)
 		{
+			System.out.println("GNBL");
 			g.drawImage(im.getImage("gridr0c2"),0,0,null);
 			g.drawImage(im.getImage("gridr1c2"),105,0,null);
 			g.drawImage(im.getImage("gridr0c0"),210,0,null);
@@ -63,6 +65,8 @@ public class TestingWindow extends JFrame
 		}
 		else if(x==4)
 		{
+
+			System.out.println("GSN");
 			g.drawImage(im.getImage("gridRed"),0,0,null);
 			g.drawImage(im.getImage("gridBlue"),105,0,null);
 			g.drawImage(im.getImage("gridBlack"),210,0,null);

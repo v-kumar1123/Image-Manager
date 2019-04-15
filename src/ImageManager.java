@@ -55,6 +55,10 @@ public class ImageManager
 			else if(readerLine[0].equals("GNbL")) {
 		        gnblLoader(readerLine);
             }
+
+			else if(readerLine[0].equals("GSN")) {
+				gsnLoader(readerLine);
+			}
 			else {
 				return false;
 			}
@@ -68,7 +72,7 @@ public class ImageManager
 	public void gnblLoader(String[]readerLine) {
         BufferedImage img=null;
         try {
-            img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
+            img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[4]));
         }catch (IOException f) {
             f.printStackTrace();
         }
@@ -77,17 +81,76 @@ public class ImageManager
         int x=0;
         int divideIntoX=Integer.parseInt(readerLine[1]);
         int divideIntoY=Integer.parseInt(readerLine[2]);
-        String key=readerLine[3];
-        int subWidth=img.getWidth()/divideIntoX;
-        for(int y=0;y<divideIntoX;y++) {
-            images.put(key+y,img.getSubimage(x,0,subWidth,img.getHeight()));
-            x+=subWidth;
-        }
+		int subHeight=img.getHeight()/divideIntoY;
+		int subWidth=img.getWidth()/divideIntoX;
+
+
+		int y=0;
+		ArrayList<BufferedImage> imgs2=new ArrayList<BufferedImage>();
+		BufferedImage[][] array=new BufferedImage[divideIntoY][divideIntoX];
+		//Splits via height
+		for(int r=0;r<divideIntoY;r++) {
+			x=0;
+			for (int c = 0; c < divideIntoX; c++) {
+				images.put(readerLine[3] + "r" + r + "c" + c, (img.getSubimage(x, y, subWidth, subHeight)));
+				//Goes Right
+				x+=subWidth;
+			}
+			//Goes Down
+			y+=subHeight;
+		}/*
+
+		for(int e=0;e<divideIntoY;e++) {
+			if(e%2==0) {
+				for (int z = subHeight*e; z < imgs2.size(); z ++) {
+
+				}
+			}
+			else if(e%2==1) {
+				for (int z = subHeight*e; z < imgs2.size(); z ++) {
+					images.put(readerLine[3] + "r" + e + "c" + (z - 1) / 2, imgs2.get(z));
+				}
+			}
+		}*/
     }
+
+    public void gsnLoader(String[]readerLine) {
+		BufferedImage img=null;
+		try {
+			img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[Integer.parseInt(readerLine[1])*Integer.parseInt(readerLine[2])+3]));
+		}catch (IOException f) {
+			f.printStackTrace();
+		}
+		BufferedImage[][] imgArray=new BufferedImage[Integer.parseInt(readerLine[1])][Integer.parseInt(readerLine[2])];
+		ArrayList<BufferedImage> imgs=new ArrayList<BufferedImage>();
+		int x=0;
+		int divideIntoX=Integer.parseInt(readerLine[1]);
+		int divideIntoY=Integer.parseInt(readerLine[2]);
+		int subHeight=img.getHeight()/divideIntoY;
+		int subWidth=img.getWidth()/divideIntoX;
+
+
+		int y=0;
+		ArrayList<BufferedImage> imgs2=new ArrayList<BufferedImage>();
+		BufferedImage[][] array=new BufferedImage[divideIntoY][divideIntoX];
+		//Splits via height\
+		int temp=0;
+		for(int r=0;r<divideIntoY;r++) {
+			x=0;
+			for (int c = 0; c < divideIntoX; c++) {
+				images.put(readerLine[3+temp], (img.getSubimage(x, y, subWidth, subHeight)));
+				//Goes Right
+				x+=subWidth;
+				temp++;
+			}
+			//Goes Down
+			y+=subHeight;
+		}
+	}
 
 	public void singleLoader(String[] readerLine) {
 		try {
-			images.put(readerLine[1], ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\"+readerLine[2])));
+			images.put(readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[2])));
 		}catch (IOException e ) {
 			e.printStackTrace();
 		}
@@ -96,7 +159,7 @@ public class ImageManager
 	public void snblLoader(String[] readerLine) {
 		BufferedImage img=null;
 		try {
-			img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
+			img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
 		}catch (IOException f) {
 			f.printStackTrace();
 		}
@@ -115,26 +178,20 @@ public class ImageManager
 	public void ssnLoader(String[] readerLine) {
         BufferedImage img=null;
         try {
-            img = ImageIO.read(new File("C:\\Users\\OTHSCS097\\Desktop\\Image-Manager\\src\\" + readerLine[Integer.parseInt(readerLine[1])+2]));
+            img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[Integer.parseInt(readerLine[1])+2]));
         }catch (IOException f) {
             f.printStackTrace();
         }
         ArrayList<BufferedImage> imgs=new ArrayList<BufferedImage>();
         int x=0;
         int divideInto=Integer.parseInt(readerLine[1]);
-        int divideIntoY=Integer.parseInt(readerLine[2]);
         String key=readerLine[2];
         int tempX=2;
         int subWidth=img.getWidth()/divideInto;
-        int subHeight=img.getWidth()/divideInto;
         for(int y=0;y<divideInto;y++) {
-            imgs.add(img.getSubimage(x,0,subWidth,img.getHeight()));
-            x+=subWidth;
+			images.put(readerLine[2+y],img.getSubimage(x,0,subWidth,img.getHeight()));
+			x+=subWidth;
             tempX++;
-        }
-        int y=0;
-        for(int c=0;c<imgs.size();c++) {
-
         }
 	}
 	/* Pre: Receives a key
