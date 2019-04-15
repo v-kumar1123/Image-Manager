@@ -1,6 +1,10 @@
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
+import javax.imageio.ImageIO;
 import java.awt.Graphics;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
@@ -22,14 +26,70 @@ public class ImageManager
 	 */
 	public boolean loadImages(String fileName) {
 		File file=new File(fileName);
-        return true;
+		Scanner reader=null;
+		try {
+			reader = new Scanner(file);
+		}catch (FileNotFoundException f) {
+			f.printStackTrace();
+			return false;
+		}
 
+		while (reader.hasNextLine()) {
+			String line = reader.nextLine();
+			String[] readerLine = line.split(",");
+
+			if(readerLine[0].equals("single")) {
+				singleLoader(readerLine);
+			}
+
+			else if(readerLine[0].equals("SNbL")) {
+				snblLoader(readerLine);
+			}
+
+			else if(true) {
+			}
+			else {
+				return false;
+			}
+
+		}
+
+		return false;
+
+	}
+
+	public void singleLoader(String[] readerLine) {
+		try {
+			images.put(readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[2])));
+		}catch (IOException e ) {
+			e.printStackTrace();
+		}
+	}
+
+	public void snblLoader(String[] readerLine) {
+		try {
+			images.put(readerLine[2]+readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[3])));
+		}catch (IOException e ) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void ssnLoader(String[] readerLine) {
+		try {
+			images.put(readerLine[2]+readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[3])));
+		}catch (IOException e ) {
+			e.printStackTrace();
+		}
 	}
 	/* Pre: Receives a key
 	 * Post: returns the image that corrisponds to the given key, null if the key is not found
 	 */
 	public BufferedImage getImage(String key)
 	{
+		if(images.get(key)!=null) {
+			return images.get(key);
+		}
 		return null;
 	}
 
