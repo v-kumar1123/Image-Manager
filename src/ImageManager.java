@@ -1,7 +1,8 @@
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -67,11 +68,13 @@ public class ImageManager
 	}
 
 	public void snblLoader(String[] readerLine) {
+		BufferedImage img;
 		try {
-			images.put(readerLine[2]+readerLine[1], ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\"+readerLine[3])));
-		}catch (IOException e ) {
-			e.printStackTrace();
+			img = ImageIO.read(new File("C:\\Users\\varun\\Desktop\\Image-Manager\\src\\" + readerLine[3]));
+		}catch (IOException f) {
+			f.printStackTrace();
 		}
+
 	}
 
 
@@ -108,6 +111,9 @@ public class ImageManager
 	 */
 	public BufferedImage removeImage(String key)
 	{
+		if(images.get(key)!=null) {
+			return images.remove(key);
+		}
 		return null;
 	}
 
@@ -116,7 +122,7 @@ public class ImageManager
 	 */
 	public void clear()
 	{
-	
+		images.clear();
 	}
 
 	/* Pre: 
